@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- edited with XML Spy v4.0 U (http://www.xmlspy.com) by Meg Bear (R&D) -->
+<BatchCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Mapping TransformationPackageID="A411E9AF-9211-4C9D-ADC3-CC5842BED5D2">
+		<Transformation type="join" name="FullPullJoinerTransformaton">
+			<Sources>
+				<SourceOne-Name>StalledNonServiceAsSource</SourceOne-Name>
+				<SourceTwo-Name>StalledNonServiceAsTarget</SourceTwo-Name>
+			</Sources>
+		</Transformation>
+		<Transformation type="Expression" name="FullPullExpressionTransformation">
+			<Sources>
+				<SourceOne-Name>FullPullJoinerTransformaton</SourceOne-Name>
+			</Sources>
+		</Transformation>
+		<Transformation type="Router" name="FullPullRouterTransformation">
+			<Sources>
+				<SourceOne-Name>FullPullExpressionTransformation</SourceOne-Name>
+			</Sources>
+		</Transformation>
+		<Transformation type="UpdateStrategy" name="FullPullUpdateStrategyforInsert">
+			<Sources>
+				<SourceOne-Name>FullPullRouterTransformation</SourceOne-Name>
+				<Filter-Name>IsInsert</Filter-Name>
+			</Sources>
+		</Transformation>
+		<Transformation type="UpdateStrategy" name="FullPullUpdateStrategyforUpdate">
+			<Sources>
+				<SourceOne-Name>FullPullRouterTransformation</SourceOne-Name>
+				<Filter-Name>IsUpdate</Filter-Name>
+			</Sources>
+		</Transformation>
+		<Transformation type="UpdateStrategy" name="FullPullUpdateStrategyforDelete">
+			<Sources>
+				<SourceOne-Name>FullPullRouterTransformation</SourceOne-Name>
+				<Filter-Name>IsDelete</Filter-Name>
+			</Sources>
+		</Transformation>
+	</Mapping>
+</BatchCollection>
